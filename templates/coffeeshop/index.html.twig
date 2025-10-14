@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Coffeeshops{% endblock %}
+
+{% block body %}
+<h1>Liste des Coffeeshops</h1>
+
+<a class="btn btn-primary mb-3" href="{{ path('coffeeshop_new') }}">Créer un coffeeshop</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Localisation</th>
+            <th>Ouvert</th>
+            <th>Construction</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+{% for cs in coffeeshops %}
+    <tr>
+        <td>{{ cs.id }}</td>
+        <td>{{ cs.name }}</td>
+        <td>{{ cs.location }}</td>
+        <td>{{ cs.availability ? 'Oui' : 'Non' }}</td>
+        <td>{{ cs.constructionDate ? cs.constructionDate|date('Y-m-d') : '—' }}</td>
+        <td>
+            <a class="btn btn-sm btn-secondary" href="{{ path('coffeeshop_show', {'id': cs.id}) }}">Voir</a>
+            <a class="btn btn-sm btn-info" href="{{ path('coffeeshop_edit', {'id': cs.id}) }}">Éditer</a>
+
+            <form method="post" action="{{ path('coffeeshop_delete', {'id': cs.id}) }}" style="display:inline" onsubmit="return confirm('Supprimer ce coffeeshop ?');">
+                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ cs.id) }}">
+                <button class="btn btn-sm btn-danger" type="submit">Supprimer</button>
+            </form>
+        </td>
+    </tr>
+{% else %}
+    <tr>
+        <td colspan="6">Aucun coffeeshop trouvé.</td>
+    </tr>
+{% endfor %}
+
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails Coffeeshop{% endblock %}
+
+{% block body %}
+<h1>{{ coffeeshop.name }}</h1>
+
+<ul class="list-group mb-3">
+    <li class="list-group-item"><strong>Localisation :</strong> {{ coffeeshop.location }}</li>
+    <li class="list-group-item"><strong>Ouvert :</strong> {{ coffeeshop.availability ? 'Oui' : 'Non' }}</li>
+    <li class="list-group-item"><strong>Date de construction :</strong> {{ coffeeshop.constructionDate ? coffeeshop.constructionDate|date('Y-m-d') : '—' }}</li>
+</ul>
+
+<a class="btn btn-info" href="{{ path('coffeeshop_edit', {'id': coffeeshop.id}) }}">Éditer</a>
+<a class="btn btn-secondary" href="{{ path('coffeeshop_index') }}">Retour</a>
+{% endblock %}

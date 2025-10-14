@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier Coffeeshop{% endblock %}
+
+{% block body %}
+<h1>Modifier Coffeeshop</h1>
+
+{{ form_start(form) }}
+    <div class="mb-3">
+        {{ form_row(form.name) }}
+    </div>
+    <div class="mb-3">
+        {{ form_row(form.location) }}
+    </div>
+    <div class="mb-3 form-check">
+        {{ form_row(form.availability) }}
+    </div>
+    <div class="mb-3">
+        {{ form_row(form.constructionDate) }}
+    </div>
+
+    <button class="btn btn-primary">Enregistrer</button>
+    <a class="btn btn-secondary" href="{{ path('coffeeshop_index') }}">Retour</a>
+{{ form_end(form) }}
+{% endblock %}
